@@ -1,2 +1,3 @@
-# node-project-template
-Simple template for basic node app setup
+# Project template for Node.js
+
+Simple template for basic Node app setup
