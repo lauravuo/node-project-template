@@ -4,8 +4,8 @@
   "description": "TODO",
   "main": "src/index.js",
   "scripts": {
-    "automerge": "circleci-automerge --filter=\"^greenkeeper/\"",
     "build": "rimraf build/ && babel ./src --out-dir build/ --copy-files --ignore *.test.js",
+    "ci:automerge": "circleci-automerge --filter=\"^greenkeeper/\"",
     "ci:lock:update": "greenkeeper-lockfile-update",
     "ci:lock:upload": "greenkeeper-lockfile-upload",
     "start": "npm run build && node ./build/index.js",
