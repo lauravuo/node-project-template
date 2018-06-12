@@ -22,7 +22,7 @@
   "author": "TODO",
   "license": "MIT",
   "dependencies": {
-    "winston": "^2.4.1"
+    "winston": "^3.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
