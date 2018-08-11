@@ -44,7 +44,7 @@ jobs:
       - run: npm ci
       - run:
           name: Merge greenkeeper branch
-          command: npm run automerge
+          command: npm run ci:automerge
 
 workflows:
   version: 2
