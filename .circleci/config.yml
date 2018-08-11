@@ -16,7 +16,7 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: npm install
+      - run: npm ci
 
       - run: npm run ci:lock:update
 
@@ -29,8 +29,31 @@ jobs:
 
       - run: npm run ci:lock:upload
 
+  automerge:
+    docker:
+      - image: circleci/node:10.8.0
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+      - run: npm ci
+      - run:
+          name: Merge greenkeeper branch
+          command: npm run automerge
+
 workflows:
-   version: 2
-   test:
+  version: 2
+  test:
     jobs:
       - test
+      - automerge:
+          requires:
+            - test
+          filters:
+            branches:
+              only: /greenkeeper\S*/

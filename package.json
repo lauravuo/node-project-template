@@ -4,6 +4,7 @@
   "description": "TODO",
   "main": "src/index.js",
   "scripts": {
+    "automerge": "circleci-automerge --filter=\"^greenkeeper/\"",
     "build": "rimraf build/ && babel ./src --out-dir build/ --copy-files --ignore *.test.js",
     "ci:lock:update": "greenkeeper-lockfile-update",
     "ci:lock:upload": "greenkeeper-lockfile-upload",
@@ -21,15 +22,13 @@
   "author": "TODO",
   "license": "MIT",
   "dependencies": {
-    "jsdom": "^11.7.0",
-    "request": "^2.85.0",
-    "rss-parser": "^3.1.2",
     "winston": "^2.4.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
+    "circleci-automerge": "^1.1.0",
     "eslint": "^5.0.1",
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-plugin-import": "^2.10.0",
