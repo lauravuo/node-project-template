@@ -1,10 +1,31 @@
 version: 2
 jobs:
-  test:
+
+  prepare:
     docker:
       - image: circleci/node:10.8.0
 
-    working_directory: ~/repo
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - npm-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
+
+      - run: npm install
+
+      - run: npm run ci:lock:update
+
+      - save_cache:
+          paths:
+            - $HOME/.npm
+          key: npm-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
+
+      - run: npm run ci:lock:upload
+
+  test:
+    docker:
+      - image: circleci/node:10.8.0
 
     steps:
       - checkout
@@ -15,22 +36,11 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run ci:lock:update
-
-      - save_cache:
-          paths:
-            - $HOME/.npm
-          key: npm-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
-
       - run: npm run test
-
-      - run: npm run ci:lock:upload
 
   automerge:
     docker:
       - image: circleci/node:10.8.0
-
-    working_directory: ~/repo
 
     steps:
       - checkout
@@ -46,7 +56,10 @@ workflows:
   version: 2
   test:
     jobs:
-      - test
+      - prepare
+      - test:
+        requires:
+          - prepare
       - automerge:
           requires:
             - test
