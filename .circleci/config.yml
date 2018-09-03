@@ -58,8 +58,8 @@ workflows:
     jobs:
       - prepare
       - test:
-        requires:
-          - prepare
+          requires:
+            - prepare
       - automerge:
           requires:
             - test
