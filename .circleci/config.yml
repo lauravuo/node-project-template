@@ -1,16 +1,15 @@
 version: 2
 jobs:
-
   test:
     docker:
-      - image: circleci/node:10.16.0
+      - image: circleci/node:12.13
 
     steps:
       - checkout
 
       - restore_cache:
           keys:
-          - npm-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - npm-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
 
       - run: npm ci
       - run: npm run test
@@ -22,13 +21,13 @@ jobs:
 
   automerge:
     docker:
-      - image: circleci/node:10.16.0
+      - image: circleci/node:12.13
 
     steps:
       - checkout
       - restore_cache:
           keys:
-          - npm-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - npm-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
       - run: npm ci
       - run:
           name: Merge greenkeeper branch
