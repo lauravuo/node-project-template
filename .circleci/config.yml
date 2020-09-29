@@ -19,28 +19,8 @@ jobs:
             - $HOME/.npm
           key: npm-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
 
-  automerge:
-    docker:
-      - image: circleci/node:12.13
-
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - npm-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
-      - run: npm ci
-      - run:
-          name: Merge greenkeeper branch
-          command: npm run ci:automerge
-
 workflows:
   version: 2
   test:
     jobs:
       - test
-      - automerge:
-          requires:
-            - test
-          filters:
-            branches:
-              only: /greenkeeper\S*/
