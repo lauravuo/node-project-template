@@ -5,9 +5,11 @@
   "main": "src/index.js",
   "scripts": {
     "build": "rimraf build/ && babel ./src --out-dir build/ --ignore **/*.test.js",
+    "deps:update": "npm-outdated-to-latest",
     "start": "npm run build && node ./build/index.js",
     "test": "npm run test:lint && npm run test:unit",
     "test:lint": "eslint ./src --format codeframe",
+    "test:lint:fix": "eslint ./src --format codeframe --fix",
     "test:unit": "jest ./src --coverage"
   },
   "repository": {
@@ -24,24 +26,25 @@
     "testEnvironment": "node"
   },
   "dependencies": {
-    "@babel/runtime": "7.7.4",
-    "winston": "3.2.1"
+    "@babel/runtime": "^7.11.2",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
-    "@babel/cli": "7.7.4",
-    "@babel/core": "7.7.4",
-    "@babel/plugin-proposal-object-rest-spread": "7.7.4",
-    "@babel/plugin-transform-runtime": "7.7.4",
-    "@babel/preset-env": "7.7.4",
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
+    "@babel/plugin-transform-runtime": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
     "babel-core": "7.0.0-bridge.0",
-    "eslint": "^6.6.0",
-    "eslint-config-airbnb-base": "14.1.0",
-    "eslint-config-prettier": "^6.7.0",
-    "eslint-plugin-import": "2.20.2",
+    "eslint": "^7.10.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.1.1",
-    "jest": "24.9.0",
-    "prettier": "^1.19.1",
-    "prettier-eslint": "^10.0.0",
+    "jest": "^26.4.2",
+    "npm-outdated-to-latest": "^1.0.3",
+    "prettier": "^2.1.2",
+    "prettier-eslint": "^11.0.0",
     "rimraf": "3.0.2"
   }
 }
